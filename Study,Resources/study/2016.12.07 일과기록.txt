@@ -1,0 +1,32 @@
+***네이버 캘린더 내용 백업
+
+피드백
+1. 파일 업로드(로직 변경 등)
+  - 변경감지는 네트워크 드라이브를 통해 해당 폴더를 직접 감시한다.
+  - 변경감지 시 파일을 로컬로 복사하여 DB에 업로드한다.
+  - try catch는 가장 상위에서만 실행
+  - delete -> truncate
+
+2. 조회 프로그램
+  - ASIS 조회가 안되는 점 수정(자바스크립트 문제였음)
+  - request 값 form에 출력하기
+
+3. 기타
+  - 이클립스 없이 웹 어플 배포하기
+      -> tomcat bin 폴더에서 
+            startup.bat - 시작
+            shutdown.bat - 종료
+  - 보완점
+      -> 네트워크나 DB Connection문제가 있을 때 파일 업로드 프로그램 종료되는 점
+            - new Timer().scheduleAtRate(new TimerTask(), long period, long time)
+               period마다 time밀리초만큼 TimerTask의 run()을 실행하겠다.
+      -> FilerWatcher를 보완해야 함(schedule -> scheduleAtRate)
+
+192.168.102.43 PC에 톰캣 구동 실험
+ -> 앞으로 톰캣은 두 PC에 모두 올리고 파일 업로드 프로그램은 43번 PC에 얹을 예정이다
+ 
+ 
+****
+
+cmd 명령어
+cd 디렉터리 변경

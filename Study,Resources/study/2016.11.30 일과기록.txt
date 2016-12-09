@@ -1,0 +1,29 @@
+***네이버 캘린더 내용 백업
+
+일과시간 내 공부
+
+  메가박스 홈페이지 리버스 엔지니어링(Spring+MyBatis 웹 어플리케이션)
+1. dataSource 핸들링 MyBatis -> Spring
+   - 스프링 컨테이너를 통해 트랜잭션을 관리하기 위해 dataSource를 Spring 설정 파일로 옮김.
+
+2. Interceptor(세션 체크)
+   - filter vs Interceptor
+      filter는 서블릿 컨테이너 소관(web.xml에 설정)
+      Interceptor는 스프링 소관(dispatcher-servlet에 설정)
+
+  반성점 및 이어지는 할일
+1. 트랜잭션 관리를 위한 설정
+2. Interceptor 로직테스트를 위한 페이지 만들기
+
+
+
+외부 프로젝트 조언
+에어비앤비 모작
+1. 글 쓰기 페이지
+2. 글 쓰기 액션
+3. 글 쓰기 후 목록으로 돌아가기
+
+그 뒤 제작 도움 줄 부분
+1. 게시판 출력
+2. 회원가입 약관
+3. ??? 까먹음
