@@ -1,0 +1,94 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css); /** Font import **/
+
+*{
+	padding: 0; margin: 0;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+body{
+	padding: 5px;
+}
+
+header{
+	color: #828282;
+}
+
+header, #search{
+	margin: 10px;
+}
+
+#viewtable table{
+	width: 1850px; height: auto;
+	margin-left: 5px;
+}
+
+#viewtable table, #viewtable table th{
+	border: 1px solid #96c7ed;
+	border-collapse: collapse;
+	
+}
+
+#viewtable table thead tr th {
+	background-color: #add1f7;
+	color: white;
+	font-size: 15px;
+	font-weight: normal;
+}
+
+#viewtable table thead #index th{
+	font-weight: bold;
+	padding-top:2px; padding-bottom: 5px;
+	font-size: 16px;
+}
+
+#viewtable table td{
+	border: 1px solid silver;
+	font-size: 14px;
+	padding-left: 2px; padding-right: 2px;
+}
+
+#viewtable table td:hover{
+	background-color: #ebebeb;
+}
+
+.tobe, .asis{
+	width: 300px; height: 25px;
+}
+
+#sel{
+	width: 70px; height: 30px;
+}
+
+.btn{
+	cursor: pointer;
+	width: 70px; height: 30px;
+	background-color: #add1f7;
+	color: white;
+	border: 0.5px solid #96c7ed;
+	border-radius: 2px;
+}
+
+.btn:hover{
+	background-color: #3ca0ff;
+	color: white;
+	border: 0.5px solid #3ca0ff;
+	font-weight: bold;
+}
+
+#alertlayer{
+	position: absolute;
+	left:43%; 
+	top: 50px;
+	padding-top: 30px; padding-bottom: 30px;
+	padding-right: 80px; padding-left: 80px;
+	background-color: white;
+	border: 0.5px solid #add1f7;
+	border-radius: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #3ca0ff;
+}
+
+
+
