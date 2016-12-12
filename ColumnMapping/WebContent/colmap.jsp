@@ -41,7 +41,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>컬럼 매핑 정의서</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/colmap.css?ver=0.212">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/colmap.css?ver=0.217">
 <script type="text/javascript" src="${pageContext.request.contextPath }/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function()
@@ -116,7 +116,7 @@
  	  	<tbody>
  	  	  <c:forEach var="vo" items="${list }" >
  	  	  	<tr align="center">
- 	  	  	 <td title="">${vo.t_dbName }</td>	<td>${vo.t_topic }</td>	<td>${vo.t_tableName }</td>	<td>${vo.t_tableNameKo }</td>	<td>${vo.t_attrName }</td>
+ 	  	  	 <td>${vo.t_dbName }</td>	<td>${vo.t_topic }</td>	<td>${vo.t_tableName }</td>	<td>${vo.t_tableNameKo }</td>	<td>${vo.t_attrName }</td>
  	  	  	 <td>${vo.t_colName }</td>	<td>${vo.t_dataType }</td>	<td>${vo.t_note }</td>	<td>${vo.s_dbName }</td>	<td>${vo.s_tableName }</td>
  	  	  	 <td>${vo.s_tableNameKo }</td>	<td>${vo.s_attrName }</td>	<td>${vo.s_colName }</td>	<td>${vo.s_dataType }</td>	<td>${vo.s_note }</td>
  	  	  	 <td>${vo.m_terms }</td>	<td>${vo.m_note }</td>
@@ -129,3 +129,6 @@
 
 </body>
 </html>
+
+
+

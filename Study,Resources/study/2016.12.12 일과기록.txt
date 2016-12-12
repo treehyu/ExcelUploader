@@ -1,0 +1,18 @@
+2016.12.12 월요일
+
+1. ColumnMapping 데이터가 많아서 테이블이 뭉게지는 현상 수정
+   (width를 2300px로 고정시킴)
+   
+2. 에어비앤비 모작 서포팅
+  - helplist.jsp 디자인 제작
+  - 서치기능 수정
+
+3. 날씨앱(가제 WPlace) 프레임워크 등
+  - 개발도구 정리(이클립스 플러그인까지)하여 업로드
+  - GitHub 생성 및 멤버 초대
+  - 개발 디렉터리 생성 및 정리
+  - 메이븐, 마이바티스 등 설정
+  - 개발 가이드 작성
+  - GitHub: https://github.com/myWebJava/WPlace
+  - 개발도구: https://drive.google.com/open?id=0B05DV63Q1yn9QXZzRm5TTk8xS28
+  

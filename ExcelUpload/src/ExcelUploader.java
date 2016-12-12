@@ -65,7 +65,7 @@ public class ExcelUploader {
 			function.excelToDBFolder(writePath);
 			
 		}catch(Exception e){
-			System.out.println(new Date()+" Exception: "+e.getMessage());
+			System.out.println(new Date()+" Exception: "+e.getLocalizedMessage());
 		}
 	}
 	

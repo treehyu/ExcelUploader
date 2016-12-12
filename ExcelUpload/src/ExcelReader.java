@@ -79,6 +79,7 @@ public class ExcelReader {
 		List<ExcelVO> result=new ArrayList<ExcelVO>();
 		
 		XSSFWorkbook workbook=new XSSFWorkbook(file);
+		System.out.println("시트를 읽어옵니다.");
 		XSSFSheet sheet=workbook.getSheetAt(workbook.getNumberOfSheets()-1); //마지막 시트를 가져온다
 		
 		//세번째줄부터 읽어온다.
@@ -111,7 +112,8 @@ public class ExcelReader {
 			}
 		}
 		
-		workbook.close();
+		if(workbook!=null)
+			workbook.close();
 		
 		return result;
 	}

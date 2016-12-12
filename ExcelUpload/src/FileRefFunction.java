@@ -57,7 +57,7 @@ public class FileRefFunction {
 				System.out.println("\t"+fileList[i].getPath());
 				
 				List<ExcelVO> voList=reader.getData(fileList[i].getPath());
-					
+				
 				if(voList!=null)
 					dao.insertAll(voList);
 				
