@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./ poi-3.16-beta1.jar poi-examples-3.16-beta1.jar poi
+ -excelant-3.16-beta1.jar poi-ooxml-3.16-beta1.jar poi-ooxml-schemas-3
+ .16-beta1.jar poi-scratchpad-3.16-beta1.jar curvesapi-1.04.jar xmlbea
+ ns-2.6.0.jar ojdbc6.jar commons-collections4-4.1.jar
+Class-Path: .
+Rsrc-Main-Class: ExcelUploader
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+
