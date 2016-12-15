@@ -79,15 +79,30 @@ public class ExcelReader {
 		List<ExcelVO> result=new ArrayList<ExcelVO>();
 		
 		XSSFWorkbook workbook=new XSSFWorkbook(file);
-		System.out.println("시트를 읽어옵니다.");
 		XSSFSheet sheet=workbook.getSheetAt(workbook.getNumberOfSheets()-1); //마지막 시트를 가져온다
 		
 		//세번째줄부터 읽어온다.
+		loop:
 		for(int row=2; row<sheet.getPhysicalNumberOfRows(); row++)
 		{
 			XSSFRow rowContent=sheet.getRow(row);
 			
-			if(rowContent!=null && rowContent.getCell(1).getStringCellValue()!="")
+			if(rowContent==null)
+			{
+				System.out.println("Null Pointer!! 빈 열입니다: "+(row+1)+"row");
+				continue loop;
+			}
+			
+			for(int i=1; i<18; i++)
+			{
+				if(rowContent.getCell(i)==null)
+				{
+					System.out.println("Null Pointer!! 빈 셀입니다: "+(row+1)+"row, "+(i+1)+"cell - 해당 row를 건너뜁니다.");
+					continue loop;
+				}
+			}
+			
+			if(rowContent.getCell(1).getStringCellValue()!="")
 			{
 				ExcelVO vo=new ExcelVO();
 				vo.setT_dbName(rowContent.getCell(1).getStringCellValue());
