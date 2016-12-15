@@ -15,7 +15,7 @@ public class FileRefFunction {
 			
 			System.out.println("해당 경로의 엑셀 파일을 읽어옵니다: "+filepath);
 			
-			voList=reader.getData(filepath);
+			voList=reader.getVOData(filepath);
 			
 			
 			//DB 액션
@@ -23,7 +23,7 @@ public class FileRefFunction {
 			boolean dbResult=false;
 			
 			dao.deleteAll();
-			dbResult=dao.insertAll(voList);
+			dbResult=dao.insertAllVO(voList);
 				
 			if(!dbResult)
 				System.out.println("DB insert fail!!");
@@ -56,10 +56,10 @@ public class FileRefFunction {
 			{
 				System.out.println("\t"+fileList[i].getPath());
 				
-				List<ExcelVO> voList=reader.getData(fileList[i].getPath());
+				List<String[]> arrList=reader.getArrData(fileList[i].getPath());
 				
-				if(voList!=null)
-					dao.insertAll(voList);
+				if(arrList!=null)
+					dao.insertAllArr(arrList);
 				
 			}
 			

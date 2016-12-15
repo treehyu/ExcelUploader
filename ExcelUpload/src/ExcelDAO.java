@@ -13,7 +13,7 @@ public class ExcelDAO {
 		conn=ConnUtil.getUtil().getConn();
 	}
 	
-	public boolean insertAll(List<ExcelVO> list) throws SQLException
+	public boolean insertAllVO(List<ExcelVO> list) throws SQLException
 	{
 		getConn();
 		
@@ -47,6 +47,54 @@ public class ExcelDAO {
 			pstmt.setString(15, list.get(i).getS_note());
 			pstmt.setString(16, list.get(i).getM_terms());
 			pstmt.setString(17, list.get(i).getM_note());
+			
+			pstmt.addBatch();
+			
+			//1000개마다 executeBatch()
+			if(i%1000==0)
+			{
+				pstmt.executeBatch();
+				pstmt.clearBatch();
+				conn.commit();
+				resultCount++;
+			}
+		}
+		
+		//executeBatch 실행&Statement 닫기
+		int[] batch=pstmt.executeBatch();
+		conn.commit();
+		pstmt.close();
+		
+		if(batch.length>0)
+			resultCount++;
+
+		if(resultCount<=0)
+			return false;
+		else
+			return true;
+	}
+	
+	public boolean insertAllArr(List<String[]> list) throws SQLException
+	{
+		getConn();
+		
+		int resultCount=0;
+		
+		StringBuilder sb=new StringBuilder();
+		sb.append(" insert into columnMapping (t_dbName, t_topic, t_tableName, t_tableNameKo, t_attrName ");
+		sb.append("  , t_colName, t_dataType, t_note, s_dbName, s_tableName, s_tableNameKo  ");
+		sb.append("  , s_attrName, s_colName, s_dataType, s_note, m_terms, m_note) ");
+		sb.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) "); 
+		
+		conn.setAutoCommit(false);
+		PreparedStatement pstmt=conn.prepareStatement(sb.toString());
+		
+		for(int i=0; i<list.size(); i++)
+		{
+			for(int j=0; j<17; j++)
+			{
+				pstmt.setString(j+1, list.get(i)[j]);
+			}
 			
 			pstmt.addBatch();
 			
