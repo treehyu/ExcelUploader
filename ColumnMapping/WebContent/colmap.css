@@ -20,7 +20,9 @@ header, #search{
 
 #viewtable table{
 	margin-left: 5px; margin-right: 5px;
-	width: 2300px; height: auto;
+	width: 1850px; height: auto;
+	
+	table-layout:fixed; word-break:break-all;
 }
 
 #viewtable table, #viewtable table th{
