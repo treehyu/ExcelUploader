@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -204,6 +206,24 @@ public class ExcelReader {
 						continue;
 					}
 					
+					//3번 셀이 한글일 경우
+					if(i+1==3 && (rowContent.getCell(i+1).getStringCellValue().charAt(0)>='가' && rowContent.getCell(i+1).getStringCellValue().charAt(0)<='힣'))
+					{
+						arr[2]=rowContent.getCell(4).getStringCellValue();
+						arr[3]=rowContent.getCell(3).getStringCellValue();
+						
+						i=3;
+					}
+					
+					//10번 셀이 한글일 경우
+					if(i+1==10 && (rowContent.getCell(i+1).getStringCellValue().charAt(0)>='가' && rowContent.getCell(i+1).getStringCellValue().charAt(0)<='힣'))
+					{
+						arr[9]=rowContent.getCell(11).getStringCellValue();
+						arr[10]=rowContent.getCell(10).getStringCellValue();
+						
+						i=10;
+					}
+					
 					arr[i]=rowContent.getCell(i+1).getStringCellValue();
 				}
 				
@@ -223,37 +243,70 @@ public class ExcelReader {
 		XSSFWorkbook workbook=new XSSFWorkbook(file);
 		XSSFSheet sheet=workbook.getSheetAt(workbook.getNumberOfSheets()-1); //마지막 시트를 가져온다
 		
-		//세번째줄부터 읽어온다.
-		for(int row=2; row<sheet.getPhysicalNumberOfRows(); row++)
+		
+		for(int row=2; row<sheet.getPhysicalNumberOfRows(); row++) //세번째줄부터 읽어온다.
 		{
 			XSSFRow rowContent=sheet.getRow(row);
 			
 			//빈 열 걸러내기
 			if(rowContent==null)
-			{
-				System.out.println("Null Pointer!! 빈 열입니다: "+(row+1)+"row");
 				continue;
-			}
 				
 			//내용이 없는 열 걸러내기
-			if(rowContent.getCell(1).getStringCellValue()!="")
-			{
-				String[] arr=new String[17];
+			if(getCellData(rowContent.getCell(1))=="" && getCellData(rowContent.getCell(9))=="")
+				continue;
+			
+			String[] arr=new String[17];
 				
-				for(int i=0; i<arr.length; i++)
+			for(int i=0; i<arr.length; i++)
+			{
+				if(rowContent.getCell(i+1)==null)
+					continue;
+				
+				//빈 셀 걸러내기
+				if(getCellData(rowContent.getCell(i+1))=="")
+					continue;
+				
+				
+				//========================================================템플릿 맞추면 지울 부분
+				//3번 셀 한글일 경우(첫글자,막글자 체크)
+				if(i==2 && getCellData(rowContent.getCell(i+1)).length()>0)
 				{
-					//빈 셀 걸러내기
-					if(rowContent.getCell(i+1)==null)
+					char first=getCellData(rowContent.getCell(i+1)).charAt(0);
+					char last=getCellData(rowContent.getCell(i+1)).charAt(getCellData(rowContent.getCell(i+1)).length()-1);
+					
+					if((first>='가' && first<='힣') || (last>='가' && last<='힣'))
 					{
-						System.out.println("Null Pointer!! 빈 셀입니다: "+(row+1)+"row, "+(i+1)+"cell - 해당 row를 건너뜁니다.");
+						arr[2]=getCellData(rowContent.getCell(4));
+						arr[3]=getCellData(rowContent.getCell(3));
+						
+						i=3;
+						continue;
+					}
+				}
+					
+				//10번 셀 한글일 경우(첫글자, 막글자 확인)
+				if(i==9 && getCellData(rowContent.getCell(i+1)).length()>0)
+				{
+					char first=getCellData(rowContent.getCell(i+1)).charAt(0);
+					char last=getCellData(rowContent.getCell(i+1)).charAt(getCellData(rowContent.getCell(i+1)).length()-1);
+					
+					if((first>='가' && first<='힣') || (last>='가' && last<='힣'))
+					{
+						arr[9]=getCellData(rowContent.getCell(11));
+						arr[10]=getCellData(rowContent.getCell(10));
+						
+						i=10;
 						continue;
 					}
 					
-					arr[i]=rowContent.getCell(i+1).getStringCellValue();
 				}
+				//====================================================================
+					
+					arr[i]=getCellData(rowContent.getCell(i+1));
+			}
 				
 				result.add(arr);
-			}
 		}
 		
 		if(workbook!=null)
@@ -261,5 +314,52 @@ public class ExcelReader {
 		
 		return result;
 	}
+	
+	
+	public String getCellData(XSSFCell cell)
+	{
+		if(cell==null)
+			return "";
+		
+		CellType type=cell.getCellTypeEnum();
+		
+		if(type==CellType.STRING)
+			return cell.getStringCellValue();
+		
+		if(type==CellType.NUMERIC)
+			return cell.getNumericCellValue()+"";
+		
+		if(type==CellType.BOOLEAN)
+			return cell.getBooleanCellValue()+"";
+		
+		if(type==CellType.ERROR)
+			return "error";
+		
+
+		return "";
+	}
+	
+	
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
